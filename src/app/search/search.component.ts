@@ -12,13 +12,13 @@ export class SearchComponent implements OnInit {
   citiesArray = [];
   cities = "";
   public weatherData: any;
-  private SingleCityData: any;
-  private multipleCityData = [];
-  private productsToDisplay = "";
+  public SingleCityData: any;
+  public multipleCityData = [];
+  public productsToDisplay = "";
   constructor(private weatherService: WeatherService) {}
   ngOnInit() {}
 
-  getCityWeatherReport(location: string) {
+  getCityWeatherReport() {
     let city = this.cities.split(",");
     // Single city search
     if (city.length == 1) {
