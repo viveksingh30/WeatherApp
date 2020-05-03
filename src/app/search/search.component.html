@@ -1,0 +1,93 @@
+<h2><label>Weather forecast</label></h2>
+
+<input
+  type="text"
+  class="form-control"
+  [(ngModel)]="cities"
+  placeholder="Pune,Delhi,Mumbai"
+/>
+
+<div style="margin-top:15px"></div>
+<button class="btn btn-outline-primary" (click)="getCityWeatherReport()">
+  search cities
+</button>
+
+<div style="margin-top:20px"></div>
+
+<!-- // single product -->
+<div class="card" *ngIf="productsToDisplay == 'single'; else multipleCities">
+  <div class="card-columns">
+    <div class="card bg-primary text-white">
+      <div class="card-body">
+        <h2 class="card-title">{{ SingleCityData.name }}</h2>
+        <h3>
+          <img
+            src="https://openweathermap.org/img/wn/04d@2x.png"
+            width="50"
+            height="50"
+          />{{ SingleCityData.main.temp }} °K
+        </h3>
+        <p class="card-text">{{ SingleCityData.weather[0].description }}</p>
+        <p class="card-text">
+          {{ SingleCityData.dt | date: "yyyy-MM-dd HH:mm:ss Z" }}
+        </p>
+        <p class="card-text">Wind {{ SingleCityData.wind.speed }} m/s</p>
+        <p class="card-text">Pressure {{ SingleCityData.main.pressure }} hpa</p>
+        <p class="card-text">Humidity {{ SingleCityData.main.humidity }}</p>
+        <p class="card-text">
+          Sunrise
+          {{ SingleCityData.sys.sunrise | date: "yyyy-MM-dd HH:mm:ss Z" }}
+        </p>
+        <p class="card-text">
+          Sunset {{ SingleCityData.sys.sunset | date: "yyyy-MM-dd HH:mm:ss Z" }}
+        </p>
+        <p class="card-text">
+          Geo coords [<span>{{ SingleCityData.coord.lon }}</span
+          >,&nbsp;<span>{{ SingleCityData.coord.lat }}</span
+          >]
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- // multiple products -->
+<ng-template #multipleCities>
+  <div class="card">
+    <div class="card-columns">
+      <div
+        class="card bg-primary text-white"
+        *ngFor="let product of multipleCityData"
+      >
+        <div class="card-body">
+          <h2 class="card-title">{{ product.name }}</h2>
+          <h3>
+            <img
+              src="https://openweathermap.org/img/wn/04d@2x.png"
+              width="50"
+              height="50"
+            />{{ product.main.temp }} °K
+          </h3>
+          <p class="card-text">{{ product.weather[0].description }}</p>
+          <p class="card-text">
+            {{ product.dt | date: "yyyy-MM-dd HH:mm:ss Z" }}
+          </p>
+          <p class="card-text">Wind {{ product.wind.speed }} m/s</p>
+          <p class="card-text">Pressure {{ product.main.pressure }} hpa</p>
+          <p class="card-text">Humidity {{ product.main.humidity }}</p>
+          <p class="card-text">
+            Sunrise {{ product.sys.sunrise | date: "yyyy-MM-dd HH:mm:ss Z" }}
+          </p>
+          <p class="card-text">
+            Sunset {{ product.sys.sunset | date: "yyyy-MM-dd HH:mm:ss Z" }}
+          </p>
+          <p class="card-text">
+            Geo coords [<span>{{ product.coord.lon }}</span
+            >,&nbsp;<span>{{ product.coord.lat }}</span
+            >]
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
